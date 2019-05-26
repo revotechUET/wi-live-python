@@ -1,0 +1,21 @@
+{
+  "name": "live-server-client",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Tung HOANG <tung.hoang@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.8",
+    "jquery": "^3.4.1"
+  }
+}

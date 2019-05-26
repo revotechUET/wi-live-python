@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test live server</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+        <style type="text/css">
+        </style>
+    </head>
+    <body>
+        <div ng-app="myApp" ng-controller="myController">
+            <button ng-click="buttonClick()">Click me</button>
+            <ul>
+                <li ng-repeat="item in messages">{{item.content}}</li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="dist/live-client.js"></script>
+        <script>
+const app = angular.module('myApp', ['logStream']);
+app.value('wiConfig', {
+    logStreamWS: "ws://localhost:3030",
+    logStreamHTTP: 'http://localhost:3030'
+})
+app.controller("myController", function($scope, $http, $timeout, logStream) {
+    $scope.messages = [];
+    let key = 'log';
+    logStream.registerCallback(key, function(msg) {
+        $scope.messages.push({content: msg.content});
+        $timeout(() => {});
+    });
+    $scope.buttonClick = function() {
+        console.log("Click");
+        //logStream.startPromise(key).then((res) => console.log(res));
+        logStream.fetchPost('/run', {pyFile: 'mypython.py', key}).then((res) => console.log(res));
+    }
+});
+        </script>
+    </body>
+</html>
