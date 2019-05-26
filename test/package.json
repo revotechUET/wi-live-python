@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
-    "live-server": "../server",
-    "run-python": "../../run-python"
+    "live-python-server": "../server",
+    "py-runner": "../py-runner"
   }
 }
