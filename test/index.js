@@ -1,8 +1,9 @@
 let express = require('express');
-let pyRunner = require('py-runner');
+const {pyRunner, WSServer} = require("wi-live-python");
+// let pyRunner = require('py-runner');
 const cors = require('cors');
 
-let WSServer = require('live-python-server');
+// let WSServer = require('live-python-server');
 let port = 3030;
 
 let app = express();
@@ -18,7 +19,7 @@ wsServer.post('/run', function(req, res) {
     pyRunner(pyFile, log2WS, log2WS, function(code) {
         log2WS("DONE");
     }, {
-        cwd: '/Users/remurd/workspace/revoltech/wi-live-python/py-runner/test'
+        cwd: '/mnt/d/workspace/wi-live-python/py-runner/test'
     });
     res.send({
         code: 200,
