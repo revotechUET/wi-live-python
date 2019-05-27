@@ -1,9 +1,10 @@
 let express = require('express');
-const {pyRunner, WSServer} = require("wi-live-python");
+const {pyRunner, server} = require("live-python-server");
 // let pyRunner = require('py-runner');
 const cors = require('cors');
 
 // let WSServer = require('live-python-server');
+let WSServer = server;
 let port = 3030;
 
 let app = express();

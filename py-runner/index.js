@@ -1,6 +1,6 @@
 var exec = require('child_process').spawn;
 module.exports = function(pyFile, stdoutCb, stderrCb, onDone, opts = {}) {
-    var pythonProc = exec('stdbuf', ['-oL', '-eL', 'python', pyFile], {stdio: ['pipe','pipe','pipe'], ...opts});
+    var pythonProc = exec('unbuffer', ['python', pyFile], {stdio: ['pipe','pipe','pipe'], ...opts});
     pythonProc.stdout.on('data', function(data){
         stdoutCb && stdoutCb(data);
     });

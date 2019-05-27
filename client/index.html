@@ -19,8 +19,8 @@
         <script>
 const app = angular.module('myApp', ['logStream']);
 app.value('wiConfig', {
-    logStreamWS: "ws://localhost:3030",
-    logStreamHTTP: 'http://localhost:3030'
+    logStreamWS: "ws://localhost:3000",
+    logStreamHTTP: 'http://localhost:3000'
 })
 app.controller("myController", function($scope, $http, $timeout, logStream) {
     $scope.messages = [];
@@ -32,7 +32,7 @@ app.controller("myController", function($scope, $http, $timeout, logStream) {
     $scope.buttonClick = function() {
         console.log("Click");
         //logStream.startPromise(key).then((res) => console.log(res));
-        logStream.fetchPost('/run', {pyFile: 'mypython.py', key}).then((res) => console.log(res));
+        logStream.fetchPost('/code-runner', {file: 'kia.py', key, token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhvYW5nIiwicm9sZSI6MiwiY29tcGFueSI6IlVFVCIsImlhdCI6MTU1ODkyMjY1NCwiZXhwIjoxNTU5MDk1NDU0fQ.jpoiUZxU3VZQzLXx4Ly7uAI9Ah-Eav1zimWw7KPw9Hg', wiId: '', project: '1'}).then((res) => console.log(res));
     }
 });
         </script>
