@@ -1,12 +1,12 @@
 const serviceName = 'logStream';
-angular.module(serviceName, []).factory(serviceName, function(wiConfig) {
-    return new Service(wiConfig);
+angular.module(serviceName, []).factory(serviceName, function(config) {
+    return new Service(config);
 });
 
 const uuidv4 = require('uuid/v4');
-function Service(wiConfig) {
+function Service(config) {
     let myId = uuidv4();
-    let ws = new WebSocket(wiConfig.logStreamWS);
+    let ws = new WebSocket(config.logStreamWS);
     let handlers = {};
     ws.onopen = function() {
         ws.send(JSON.stringify({
@@ -29,7 +29,7 @@ function Service(wiConfig) {
     }
     this.fetchGet = fetchGet;
     function fetchGet(path, params) {
-        var url = new URL(wiConfig.logStreamHTTP + path);
+        var url = new URL(config.logStreamHTTP + path);
         let _params = params || {};
         _params.wiId = myId;
         url.search = new URLSearchParams(_params);
@@ -40,7 +40,7 @@ function Service(wiConfig) {
     this.fetchPost = fetchPost;
     function fetchPost(path, data = {}) {
         data.wiId = myId;
-        var url = new URL(wiConfig.logStreamHTTP + path);
+        var url = new URL(config.logStreamHTTP + path);
         return fetch(url, {
             method: 'POST', 
             body: JSON.stringify(data),
