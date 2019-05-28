@@ -4,7 +4,7 @@ angular.module(serviceName, []).factory(serviceName, function(config) {
 });
 
 const uuidv4 = require('uuid/v4');
-const ReconnectingWebSocket = require('reconnecting-websocket');
+const ReconnectingWebSocket = require('reconnecting-websocket').default;
 function Service(config) {
     let myId = uuidv4();
     // let ws = new WebSocket(config.logStreamWS);
