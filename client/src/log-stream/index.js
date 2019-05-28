@@ -4,9 +4,11 @@ angular.module(serviceName, []).factory(serviceName, function(config) {
 });
 
 const uuidv4 = require('uuid/v4');
+const ReconnectingWebSocket = require('reconnecting-websocket');
 function Service(config) {
     let myId = uuidv4();
-    let ws = new WebSocket(config.logStreamWS);
+    // let ws = new WebSocket(config.logStreamWS);
+    let ws = new ReconnectingWebSocket(config.logStreamWS);
     let handlers = {};
     ws.onopen = function() {
         ws.send(JSON.stringify({
